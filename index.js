@@ -24,10 +24,6 @@ const logCounter = ({ counter }) => {
   console.log(`COUNTER IS ${counter}`)
 }
 store.subscribe(logCounter)
-const unsubA = store.subscribe(() => console.log('SUBSCRIBER A'))
-const unsubB = store.subscribe(() => console.log('SUBSCRIBER B'))
-const unsubC = store.subscribe(() => console.log('SUBSCRIBER C'))
-
 
 // Capture the initial value
 const first = store.getState()
@@ -41,7 +37,4 @@ console.log('SECOND', second)
 
 // Dispatch another action.
 // Notice the subscribed function run a second time
-unsubA()
-unsubC()
-
 store.dispatch({ type: 'INCREMENT' })
