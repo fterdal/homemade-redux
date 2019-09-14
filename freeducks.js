@@ -41,4 +41,30 @@ store => next => action => {
 
 }
 */
+
+const funcA = a => {
+  console.log('A')
+  return a
+}
+const funcB = b => {
+  console.log('B')
+  return b
+}
+const funcC = c => {
+  console.log('C')
+  return c
+}
+
+const compose = (...funcs) => {
+  return funcs.reduce((acc, curr) => {
+    return acc(curr)
+  }, a => a)
+}
+const composedABC = compose(
+  funcA,
+  funcB,
+  funcC
+)
+console.log(composedABC('hello'))
+
 exports.applyMiddleware = (...middlewares) => {}
