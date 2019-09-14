@@ -58,7 +58,7 @@ const funcC = c => {
 const compose = (...funcs) => {
   return funcs.reduce((acc, curr) => {
     return acc(curr)
-  }, a => a)
+  })
 }
 const composedABC = compose(
   funcA,
