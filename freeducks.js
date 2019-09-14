@@ -1,5 +1,6 @@
 exports.createStore = reducer => {
   let state = reducer(undefined, { type: '@@INIT' })
+
   let subscribers = []
 
   const _nextId = () =>
@@ -16,7 +17,9 @@ exports.createStore = reducer => {
       subscribeFn(state)
     })
   }
+
   const getState = () => state
+
   const subscribe = subscribeFn => {
     const id = _nextId()
     subscribers.push({ id, subscribeFn })
@@ -25,6 +28,7 @@ exports.createStore = reducer => {
     }
     return unsubscribe
   }
+
   return {
     dispatch,
     getState,
