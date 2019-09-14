@@ -4,9 +4,14 @@ exports.createStore = reducer => {
 
   const dispatch = action => {
     state = reducer(state, action)
+    subscribers.forEach(subscribeFn => {
+      subscribeFn(state)
+    })
   }
   const getState = () => state
-  const subscribe = () => {}
+  const subscribe = (subscribeFn) => {
+    subscribers.push(subscribeFn)
+  }
   return {
     dispatch,
     getState,
