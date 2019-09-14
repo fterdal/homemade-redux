@@ -1,18 +1,23 @@
-const createStore = (reducer) => {
+const { createStore } = require('./freeducks')
 
-  let state = {}
-  const subscribers = []
+const initialState = { counter: 0 }
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      // BAD DUCK 😈 🦆
+      // state.counter++
+      // return state
 
-  const dispatch = () => {}
-  const getState = () => {}
-  const subscribe = () => {}
-  return {
-    dispatch,
-    getState,
-    subscribe
+      // GOOD DUCK 😇 🦆
+      return { ...state, counter: state.counter + 1 }
+    default:
+      return state
   }
 }
 
-const store = createStore()
-
-console.log('STORE', store)
+const store = createStore(reducer)
+const first = store.getState()
+store.dispatch({ type: 'INCREMENT' })
+const second = store.getState()
+console.log('FIRST', first)
+console.log('SECOND', second)
