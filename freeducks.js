@@ -3,17 +3,9 @@ exports.createStore = reducer => {
 
   let subscribers = []
 
-  const _nextId = () =>
-    1 +
-    subscribers
-      .map(subscriber => subscriber.id)
-      .reduce((highestId, currentId) => {
-        return currentId > highestId ? currentId : highestId
-      }, 0)
-
   const dispatch = action => {
     state = reducer(state, action)
-    subscribers.forEach(({ subscribeFn }) => {
+    subscribers.forEach(subscribeFn => {
       subscribeFn(state)
     })
   }
@@ -21,10 +13,9 @@ exports.createStore = reducer => {
   const getState = () => state
 
   const subscribe = subscribeFn => {
-    const id = _nextId()
-    subscribers.push({ id, subscribeFn })
+    subscribers.push(subscribeFn)
     const unsubscribe = () => {
-      subscribers = subscribers.filter(subscriber => subscriber.id !== id)
+      subscribers.splice(subscribers.indexOf(subscribeFn), 1)
     }
     return unsubscribe
   }
@@ -35,3 +26,19 @@ exports.createStore = reducer => {
     subscribe,
   }
 }
+
+/*
+A Redux middleware function looks like this:
+function (store) {
+  return function(next) {
+    return function(action) {
+      return next(action)
+    }
+  }
+}
+OR written as this:
+store => next => action => {
+
+}
+*/
+exports.applyMiddleware = (...middlewares) => {}
