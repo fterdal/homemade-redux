@@ -67,4 +67,6 @@ const composedABC = compose(
 )
 console.log(composedABC('hello'))
 
-exports.applyMiddleware = (...middlewares) => {}
+exports.applyMiddleware = (...middlewares) => {
+
+}
